@@ -5,8 +5,16 @@ using System.Text;
 
 namespace RuleEngine.Parsers
 {
+    /// <summary>
+    /// 规则转换器
+    /// </summary>
     internal class RegionParser
     {
+        /// <summary>
+        /// 转换规则
+        /// </summary>
+        /// <param name="text">所有规则函数</param>
+        /// <returns></returns>
         public static List<RuleRegion> ParseRegions(string text)
         {
             List<RuleRegion> regions = new List<RuleRegion>();
@@ -15,13 +23,13 @@ namespace RuleEngine.Parsers
                 return regions;
             if (text.Trim().Length <= 0)
                 return regions;
-
+            //换行，回车作为函数行分隔
             string[] lines = text.Split("\r\n".ToCharArray());
             if (lines == null)
                 return regions;
             if (lines.Length == 0)
                 return regions;
-
+            //去除空白行
             List<string> filteredLines = ParseHelper.FilterEmptyRow(lines);
 
             RuleRegion region = null;
