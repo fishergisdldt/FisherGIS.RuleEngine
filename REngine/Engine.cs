@@ -6,6 +6,9 @@ using Noesis.Javascript;
 
 namespace RuleEngine
 {
+    /// <summary>
+    /// 规则引擎
+    /// </summary>
     internal static class Engine
     {
         private static JavascriptContext context = new JavascriptContext();
