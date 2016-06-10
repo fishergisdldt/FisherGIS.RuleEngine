@@ -7,6 +7,11 @@ namespace RuleEngine.Parsers
 {
     internal class RuleParser
     {
+        /// <summary>
+        /// 规则转换
+        /// </summary>
+        /// <param name="text">规则内容</param>
+        /// <returns></returns>
         public static List<RuleDefination> ParseRules(string text)
         {
             List<RuleDefination> rules = new List<RuleDefination>();
