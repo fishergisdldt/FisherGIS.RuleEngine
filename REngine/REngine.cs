@@ -11,11 +11,17 @@ namespace RuleEngine
     {
         private static RConfig config;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         static REngine()
         {
             LoadSettings();
         }
 
+        /// <summary>
+        /// 从appconfig中读出规则库加载规则配置
+        /// </summary>
         private static void LoadSettings()
         {
             config = new RConfig();
@@ -35,7 +41,9 @@ namespace RuleEngine
 
             LoadRules();
         }
-
+        /// <summary>
+        /// 加载规则
+        /// </summary>
         private static void LoadRules()
         {
             var files=System.IO.Directory.GetFiles(config.RulefilesPath, "*.rule");
