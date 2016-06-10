@@ -42,7 +42,7 @@ namespace RuleEngine
             LoadRules();
         }
         /// <summary>
-        /// 加载规则
+        /// 加载规则，将规则存储在config的规则字典中 key ：组+规则名称
         /// </summary>
         private static void LoadRules()
         {
@@ -55,7 +55,7 @@ namespace RuleEngine
                 var fileText = System.IO.File.ReadAllText(file);
                 text.AppendLine(fileText);
             });
-
+            //获取规则库规则组
             List<RuleRegion> regions=RegionParser.ParseRegions(text.ToString());
             if (regions == null || regions.Count == 0)
                 throw new Exception("region不存在");
@@ -76,8 +76,16 @@ namespace RuleEngine
                 });
             });
         }
-
+        /// <summary>
+        /// 默认规则名
+        /// </summary>
         private static string DefaultRuleName = "default";
+        /// <summary>
+        /// 通过规则组和规则标示找到规则
+        /// </summary>
+        /// <param name="ruleRegionId">规则组标示</param>
+        /// <param name="ruleId">规则标示</param>
+        /// <returns></returns>
         private static string LocateRuleContent(string ruleRegionId, string ruleId)
         {
             var key = string.Format("{0}.{1}", ruleRegionId, ruleId);
@@ -101,9 +109,16 @@ namespace RuleEngine
             info.ParameterValue = value;
             return info;
         }
-
+        /// <summary>
+        /// 通过规则组 规则标示获取该规则下的结果
+        /// </summary>
+        /// <param name="ruleRegionId"></param>
+        /// <param name="ruleId"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public static float InvokeAsFloat(string ruleRegionId, string ruleId, params ParameterInfo[] parameters)
         {
+            //获取规则编码
             var ruleCode = LocateRuleContent(ruleRegionId, ruleId);
             return Engine.GetResult_Float(ruleCode, parameters);
         }
