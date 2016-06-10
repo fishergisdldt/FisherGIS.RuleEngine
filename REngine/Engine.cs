@@ -12,7 +12,9 @@ namespace RuleEngine
     internal static class Engine
     {
         private static JavascriptContext context = new JavascriptContext();
+        //请求计算次数
         private static int usedCount = 0;
+        //最大规则转换次数，多于此次数将重新新鲜js转换
         private const int reGenerateJSContextPeek = 1500;
         private static IJavascriptGenerator jsGenerator = new DefaultJavascriptGenerator();
 
@@ -33,6 +35,12 @@ namespace RuleEngine
                 return (int)f;
             }
         }
+        /// <summary>
+        /// 获取结果
+        /// </summary>
+        /// <param name="externalCode"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public static float GetResult_Float(string externalCode, params ParameterInfo[] parameters)
         {
             object o = GetResult(externalCode, parameters);
@@ -67,7 +75,12 @@ namespace RuleEngine
         {
             GetResult(externalCode, parameters);
         }
-
+        /// <summary>
+        /// 获取结果
+        /// </summary>
+        /// <param name="externalCode"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public static object GetResult(string externalCode, params ParameterInfo[] parameters)
         {
             ResourceEnsurace();
