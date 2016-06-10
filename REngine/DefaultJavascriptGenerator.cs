@@ -8,6 +8,11 @@ namespace RuleEngine
 {
     internal class DefaultJavascriptGenerator : IJavascriptGenerator
     {
+        /// <summary>
+        /// 生成可执行的js函数
+        /// </summary>
+        /// <param name="jsCode"></param>
+        /// <returns></returns>
         public string GenerateJS(string jsCode)
         {
             StringBuilder sb = new StringBuilder();
@@ -24,6 +29,10 @@ namespace RuleEngine
         }
 
         private string _js = string.Empty;
+        /// <summary>
+        /// 添加underscore js
+        /// </summary>
+        /// <returns></returns>
         private string GeneratePreservedJS()
         {
             if (!string.IsNullOrEmpty(_js))
